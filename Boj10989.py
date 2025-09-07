@@ -1,6 +1,6 @@
 import sys
 
-input = sys.stdin.readline
+input = lambda: sys.stdin.readline().rstrip()
 
 # 계수정렬 활용
 n = int(input())
