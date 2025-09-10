@@ -1,8 +1,6 @@
 from enum import Enum
 from typing import Any
 
-from networkx import is_empty
-
 
 class FixedQueue:
 
