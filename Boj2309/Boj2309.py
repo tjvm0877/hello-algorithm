@@ -1,32 +1,39 @@
 import sys
-
-data = [sys.stdin.readline().strip() for i in range(9)]
-heights = list(map(int, data))
+from typing import Sequence
 
 
-def find(arr: list, i: int, current_arr: list) -> list:
-    if len(current_arr) == 7:
-        if sum(current_arr) == 100:
-            return current_arr
+input = lambda: sys.stdin.readline().rstrip()
+dwarfs: Sequence
+
+
+def find_combinations(i, list):
+
+    if len(list) == 7:
+        if sum(list) == 100:
+            return list
         else:
-            return []
+            return None
+
     if i >= 9:
-        return []
+        return None
 
-    # 선택한다 (리스트 복사해서 새로운 리스트로 전달)
-    select_arr = find(arr, i + 1, current_arr + [arr[i]])
-    if select_arr:
-        return select_arr
+    # 이번 난쟁이 선택
+    select = find_combinations(i + 1, list + [dwarfs[i]])
 
-    # 선택하지 않는다
-    pass_arr = find(arr, i + 1, current_arr)
-    if pass_arr:
-        return pass_arr
+    if select is not None:
+        return select
 
-    return []
+    # 이번 난쟁이 선택 안함
+    unselect = find_combinations(i + 1, list)
+    if unselect is not None:
+        return unselect
+
+    return None
 
 
-ans = find(heights, 0, list())
-ans.sort()
-for height in ans:
-    print(height)
+if __name__ == "__main__":
+    dwarfs = [int(input()) for _ in range(9)]
+    ans = find_combinations(0, list())
+    ans.sort()
+    for i in ans:
+        print(i)

@@ -1,6 +1,11 @@
-import math
+import sys
 
+input = lambda: sys.stdin.readline().rstrip()
 A, B, V = map(int, input().split())
 
-days = math.ceil((V - B) / (A - B))
-print(days)
+day = (V - B) / (A - B)
+
+if (V - B) % (A - B) != 0:
+    day += 1
+
+print(int(day))

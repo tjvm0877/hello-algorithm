@@ -1,40 +1,32 @@
-# |A[0] - A[1]| + |A[1] - A[2]| + ... + |A[N-2] - A[N-1]|
+from math import inf
 import sys
 
-n = int(sys.stdin.readline().strip())  # 첫 줄: 숫자 개수
-data = list(map(int, sys.stdin.readline().split()))
 
-is_used = [1 for _ in range(n)]
-arr = [0 for _ in range(n)]
+input = lambda: sys.stdin.readline().rstrip()
 
 
-# arr = 1~6을 조합해서 만든조합해서 만든 배열
-def recursion(pos, arr, is_used):
-    global n
-    if pos >= n:
-        result = 0
-        for j in range(1, n):
-            result += abs(data[arr[j - 1]] - data[arr[j]])
-        return result
+def get_max(i, visited, selected):
+    global numbers
 
-    local_max = -sys.maxsize - 1
+    if i >= len(visited):
+        sum = 0
+        for index in range(1, i):
+            sum += abs(selected[index - 1] - selected[index])
+        return sum
 
-    for i in range(n):
-        # 넣고
-        if is_used[i] == 0:
+    ans = float(-inf)
+    for num in range(len(visited)):
+        if visited[num] == True:
             continue
+        visited[num] = True
+        ans = max(ans, get_max(i + 1, visited, selected + [numbers[num]]))
+        visited[num] = False
 
-        arr[pos] = i
-        is_used[i] = 0
-
-        # 값 얻기
-        value = recursion(pos + 1, arr, is_used)
-        local_max = max(value, local_max)
-
-        # 빼고
-        is_used[i] = 1
-
-    return local_max
+    return ans
 
 
-print(recursion(0, arr, is_used))
+n = int(input())
+numbers = list(map(int, input().split()))
+visited = [False] * n
+
+print(get_max(0, visited, list()))

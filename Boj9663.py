@@ -1,34 +1,30 @@
-import sys
+def nQueen(depth):
+    global N, arr, count
+    if depth == N:
+        count += 1
+        return
+    for i in range(N):
+        arr[depth] = i
+        if check(depth):
+            nQueen(depth + 1)
 
-input = sys.stdin.readline
 
-n = int(input())
-
-visited = [-1] * n
-cnt = 0
-
-
-def check(now_row):
-    for row in range(now_row):
-        if visited[now_row] == visited[row] or now_row - row == abs(
-            visited[now_row] - visited[row]
-        ):
+def check(depth):
+    global arr
+    for i in range(depth):
+        if arr[depth] == arr[i]:
+            return False
+        if abs(depth - i) == abs(arr[depth] - arr[i]):
             return False
     return True
 
 
-def dfs(row):
-    global cnt
+if __name__ == "__main__":
+    import sys
 
-    if row == n:
-        cnt += 1
-
-    else:
-        for col in range(n):
-            visited[row] = col
-            if check(row):
-                dfs(row + 1)
-
-
-dfs(0)
-print(cnt)
+    input = sys.stdin.readline
+    N = int(input())
+    arr = [0] * N
+    count = 0
+    nQueen(0)
+    print(count)

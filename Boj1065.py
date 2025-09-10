@@ -1,3 +1,9 @@
+import sys
+
+
+input = lambda: sys.stdin.readline().rstrip()
+
+
 def is_arithmetic(num: int) -> bool:
     if num < 100:
         return True
@@ -14,10 +20,11 @@ def is_arithmetic(num: int) -> bool:
     return True
 
 
-n = int(input())
+if __name__ == "__main__":
+    n = int(input())
 
-ans = 0
-for i in range(1, n + 1):
-    if is_arithmetic(i) is True:
-        ans += 1
-print(ans)
+    ans = 0
+    for i in range(1, n + 1):
+        if is_arithmetic(i) is True:
+            ans += 1
+    print(ans)
