@@ -1,7 +1,5 @@
 from typing import Any
 
-from networkx import is_empty
-
 
 class FixedStack:
     """고정 길이 스택 클래스"""
