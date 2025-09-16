@@ -20,3 +20,9 @@ def quick_sort(a: MutableSequence, left: int, right: int) -> None:
         quick_sort(a, left, pr)
     if pl < right:
         quick_sort(a, pl, right)
+
+
+if __name__ == "__main__":
+    arr = [5, 8, 4, 2, 6, 1, 3, 9, 7]
+    quick_sort(arr, 0, len(arr) - 1)
+    print(arr)

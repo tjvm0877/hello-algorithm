@@ -10,3 +10,9 @@ def selection_sort(a: MutableSequence) -> None:
             if a[j] < a[min]:
                 min = j
         a[i], a[min] = a[min], a[i]
+
+
+if __name__ == "__main__":
+    arr = [6, 4, 8, 3, 1, 9, 7]
+    selection_sort(arr)
+    print(arr)
