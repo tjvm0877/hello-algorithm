@@ -30,6 +30,7 @@ def dijkstra(graph, start, n):
 n, m = map(int, input().split())
 start = int(input())
 
+# 인접 리스트 생성
 graph = [[] for _ in range(n + 1)]
 for _ in range(m):
     a, b, c = map(int, input().split())
